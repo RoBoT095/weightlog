@@ -16,7 +16,7 @@ class AnalyticsScreen extends ConsumerWidget {
         child: Text(
           'Add at least 1 weight entry to view analytics.',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
         ),
       );

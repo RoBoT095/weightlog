@@ -48,7 +48,7 @@ class _WeightListState extends ConsumerState<WeightList> {
         child: Text(
           'No weight entries added yet.',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
         ),
       );

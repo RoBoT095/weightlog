@@ -1,5 +1,8 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sql;
@@ -114,6 +117,36 @@ class UserWeightNotifier extends StateNotifier<List<WeightTrackModel>> {
           ),
         )
         .toList();
+  }
+
+  Future<void> exportDatabase(String saveToDir) async {
+    final dbPath = await sql.getDatabasesPath();
+    final sourcePath = path.join(dbPath, 'weightTracker.db');
+    final targetPath = path.join(saveToDir, 'weightTracker_export.db');
+
+    try {
+      await File(targetPath).writeAsBytes(await File(sourcePath).readAsBytes());
+      debugPrint('Database exported to: $targetPath');
+    } catch (e) {
+      debugPrint('Error exporting database: $e');
+    }
+  }
+
+  Future<void> importDatabase(PlatformFile file) async {
+    final dbPath = await sql.getDatabasesPath();
+    final targetPath = path.join(dbPath, 'weightTracker.db');
+
+    try {
+      if (file.bytes != null) {
+        await File(targetPath).writeAsBytes(file.bytes!);
+        debugPrint('Database imported successfully');
+        loadWeight();
+      } else {
+        debugPrint('File bytes is null');
+      }
+    } catch (e) {
+      debugPrint('Error importing database: $e');
+    }
   }
 
   String convertDate(int date) {

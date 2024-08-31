@@ -40,23 +40,21 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings,
-                size: 26, color: Theme.of(context).colorScheme.onBackground),
+                size: 26, color: Theme.of(context).colorScheme.onSurface),
             title: Text(
               "Settings",
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 24),
+                  color: Theme.of(context).colorScheme.onSurface, fontSize: 24),
             ),
             onTap: () {},
           ),
           ListTile(
             leading: Icon(Icons.info_outline,
-                size: 26, color: Theme.of(context).colorScheme.onBackground),
+                size: 26, color: Theme.of(context).colorScheme.onSurface),
             title: Text(
               "Info/help",
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 24),
+                  color: Theme.of(context).colorScheme.onSurface, fontSize: 24),
             ),
             onTap: () {},
           ),
