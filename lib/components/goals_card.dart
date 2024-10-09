@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weight_tracker/providers/settings_filters.dart';
+import 'package:weightlog/providers/settings_filters.dart';
 
 class UserGoalsCard extends ConsumerStatefulWidget {
   const UserGoalsCard({super.key});
@@ -50,6 +50,7 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
       padding: const EdgeInsets.all(4),
       child: Center(
         child: Card(
+          color: Theme.of(context).colorScheme.surfaceContainer,
           child: ListTile(
             leading: const Icon(
               Icons.flag,
@@ -61,10 +62,13 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
                 !_isGoalEditMode
                     ? Text(
                         _weightGoalController.text,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
-                          color: Colors.red,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withRed(255),
                         ),
                       )
                     : Expanded(
@@ -88,7 +92,10 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
               ],
             ),
             trailing: IconButton(
-              icon: Icon(!_isGoalEditMode ? Icons.settings : Icons.save),
+              icon: Icon(
+                !_isGoalEditMode ? Icons.edit : Icons.save,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
               onPressed: () {
                 if (_isGoalEditMode) {
                   final newWeightGoal =

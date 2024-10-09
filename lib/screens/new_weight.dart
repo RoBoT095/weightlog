@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weight_tracker/providers/settings_filters.dart';
 
-import 'package:weight_tracker/providers/user_weight.dart';
+import 'package:weightlog/providers/settings_filters.dart';
+import 'package:weightlog/providers/user_weight.dart';
 
 class NewWeightScreen extends ConsumerStatefulWidget {
   const NewWeightScreen({super.key});
@@ -26,13 +26,6 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
   TimeOfDay _selectedTime = TimeOfDay.now();
   late DateTime _selectedDateAndTime;
   String _userComment = '';
-
-  @override
-  void dispose() {
-    _weightValueController.dispose();
-    _commentController.dispose();
-    super.dispose();
-  }
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -122,12 +115,13 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Add New Weight',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -139,9 +133,15 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)')),
               ],
-              decoration: const InputDecoration(
-                hintText: "Weight",
-              ),
+              decoration: InputDecoration(
+                  hintText: "Weight",
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.6),
+                  )),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,6 +152,8 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
                 ),
                 TextButton.icon(
                   onPressed: _presentDatePicker,
+                  style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.secondary),
                   icon: const Icon(Icons.calendar_month),
                   label: Text(formatter.format(_selectedDate)),
                 ),
@@ -161,6 +163,8 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
                 ),
                 TextButton.icon(
                   onPressed: _presentTimePicker,
+                  style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.secondary),
                   icon: const Icon(Icons.more_time),
                   label: Text(_selectedTime.format(context)),
                 ),
@@ -171,19 +175,29 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
               controller: _commentController,
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: "Add a comment",
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.6)),
+                border: const OutlineInputBorder(),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
+                TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Cancel")),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary),
+                    )),
                 const SizedBox(width: 8),
                 FilledButton(
                   onPressed: _submitNewWeightData,
@@ -195,5 +209,12 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _weightValueController.dispose();
+    _commentController.dispose();
+    super.dispose();
   }
 }

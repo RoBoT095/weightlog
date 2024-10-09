@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:sqflite/sqlite_api.dart';
 import 'package:intl/intl.dart';
 
-import 'package:weight_tracker/models/weight.dart';
+import 'package:weightlog/models/weight.dart';
 
 final formatter = DateFormat.yMMMd();
 

@@ -1,8 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weight_tracker/providers/settings_filters.dart';
-import 'package:weight_tracker/providers/user_weight.dart';
+import 'package:weightlog/providers/settings_filters.dart';
+import 'package:weightlog/providers/theme_mode.dart';
+import 'package:weightlog/providers/user_weight.dart';
+import 'package:weightlog/widgets/list_section_title.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -10,6 +12,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activeFilters = ref.watch(settingsFilterProvider);
+    final activeTheme = ref.watch(themeModeProvider);
 
     void snackBarMessage(String text) {
       if (context.mounted) {
@@ -52,28 +55,47 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Settings',
           style: TextStyle(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
       ),
-      body: Column(
+      body: ListView(
         children: [
+          sectionTitle('Units', color: Theme.of(context).colorScheme.secondary),
           SwitchListTile(
             title: const Text('Switch to kilograms'),
             subtitle: const Text('Still saves as lb. but converts to kg.'),
             value: activeFilters[Filter.useKilograms]!,
-            onChanged: (isChecked) {
-              ref
-                  .read(settingsFilterProvider.notifier)
-                  .setFilter(Filter.useKilograms, isChecked);
-            },
+            onChanged: (isChecked) => ref
+                .read(settingsFilterProvider.notifier)
+                .setFilter(Filter.useKilograms, isChecked),
           ),
           const Divider(),
+          sectionTitle('Styles',
+              color: Theme.of(context).colorScheme.secondary),
+          ListTile(
+            title: const Text('Theme Mode'),
+            trailing: DropdownButton(
+              value: activeTheme.name,
+              items: const [
+                DropdownMenuItem(value: 'system', child: Text('System')),
+                DropdownMenuItem(value: 'light', child: Text('Light')),
+                DropdownMenuItem(value: 'dark', child: Text('Dark')),
+              ],
+              onChanged: (value) => ref
+                  .read(themeModeProvider.notifier)
+                  .setTheme(value ?? 'light'),
+            ),
+          ),
+          const Divider(),
+          sectionTitle('Database',
+              color: Theme.of(context).colorScheme.secondary),
           ListTile(
             title: const Text('Export Database'),
             subtitle: const Text('Export all your weight data as an .db file'),

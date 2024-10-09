@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weight_tracker/providers/settings_filters.dart';
+import 'package:weightlog/providers/settings_filters.dart';
 
-// import 'package:weight_tracker/widgets/main_drawer.dart';
-import 'package:weight_tracker/screens/dashboard.dart';
-import 'package:weight_tracker/screens/new_weight.dart';
-import 'package:weight_tracker/screens/analytics.dart';
-import 'package:weight_tracker/screens/settings.dart';
+import 'package:weightlog/screens/dashboard.dart';
+import 'package:weightlog/screens/new_weight.dart';
+import 'package:weightlog/screens/analytics.dart';
+import 'package:weightlog/screens/settings.dart';
 
 class NavScreen extends ConsumerStatefulWidget {
   const NavScreen({super.key});
@@ -41,12 +40,14 @@ class _NavScreenState extends ConsumerState<NavScreen> {
     }
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           activePageTitle,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           IconButton(
@@ -61,9 +62,9 @@ class _NavScreenState extends ConsumerState<NavScreen> {
           ),
         ],
       ),
-      // drawer: const MainDrawer(),
       body: activePage,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const NewWeightScreen(),
@@ -76,10 +77,20 @@ class _NavScreenState extends ConsumerState<NavScreen> {
         onTap: _selectPage,
         currentIndex: _selectedPageIndex,
         iconSize: 40,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'Dashboard'),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.analytics), label: 'Analytics'),
+              icon: Icon(
+                Icons.inbox,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              label: 'Dashboard'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.analytics,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              label: 'Analytics'),
         ],
       ),
     );

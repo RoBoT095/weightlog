@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:weight_tracker/providers/user_weight.dart';
-import 'package:weight_tracker/widgets/graph/weight_graph.dart';
+import 'package:weightlog/providers/user_weight.dart';
+import 'package:weightlog/components/graph/weight_graph.dart';
 
 class AnalyticsScreen extends ConsumerWidget {
   const AnalyticsScreen({super.key});

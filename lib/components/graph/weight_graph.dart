@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:weight_tracker/models/weight.dart';
-import 'package:weight_tracker/providers/settings_filters.dart';
-import 'package:weight_tracker/providers/user_weight.dart';
+import 'package:weightlog/models/weight.dart';
+import 'package:weightlog/providers/settings_filters.dart';
+import 'package:weightlog/providers/user_weight.dart';
 
 class WeightGraph extends ConsumerWidget {
   const WeightGraph({

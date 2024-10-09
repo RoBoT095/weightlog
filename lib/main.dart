@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weightlog/constants/theme_colors.dart';
 
-import 'package:weight_tracker/screens/nav.dart';
+import 'package:weightlog/providers/theme_mode.dart';
+import 'package:weightlog/screens/nav.dart';
 
 void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'WeightLog App',
-        theme: ThemeData().copyWith(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 205, 70, 70)),
-        ),
+        theme: AppThemes.lightDefault,
+        darkTheme: AppThemes.darkDefault,
+        themeMode: themeMode,
         home: const NavScreen());
   }
 }

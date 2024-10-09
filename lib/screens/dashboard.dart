@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:weight_tracker/providers/user_weight.dart';
-import 'package:weight_tracker/widgets/weight_list.dart';
+import 'package:weightlog/providers/user_weight.dart';
+import 'package:weightlog/components/weight_list.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});

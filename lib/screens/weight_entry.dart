@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weight_tracker/models/weight.dart';
+import 'package:weightlog/models/weight.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weight_tracker/providers/settings_filters.dart';
-import 'package:weight_tracker/providers/user_weight.dart';
+import 'package:weightlog/providers/settings_filters.dart';
+import 'package:weightlog/providers/user_weight.dart';
 
 class WeightEntryScreen extends ConsumerStatefulWidget {
   const WeightEntryScreen({super.key, required this.userWeight});
@@ -105,11 +105,12 @@ class _WeightEntryScreenState extends ConsumerState<WeightEntryScreen> {
     final formatter = DateFormat('MMMM dd, yyyy');
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Weight Entry',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           IconButton(
