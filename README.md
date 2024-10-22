@@ -2,6 +2,8 @@
 
 # WeightLog
 
+[![GitHub](https://img.shields.io/github/license/RoBoT095/weightlog)](https://github.com/RoBoT095/weightlog/blob/main/LICENSE)
+
 **A simple app to record your weight daily**
 
 ## Features
@@ -18,3 +20,6 @@
 <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew.jpg?raw=true" alt="New Weight" width=200 />
 <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics.jpg?raw=true" alt="Analytics" width=200 />
 </p>
+
+<!-- Debug symbols in: projectFolder/build/app/intermediates/merged_native_libs/release/out/lib/ -->
+<!-- select the three folders "arm64-v8a, armeabi-v7a, x86_64" and compress into native-debug-symbols.zip -->
