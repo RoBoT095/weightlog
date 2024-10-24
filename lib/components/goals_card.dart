@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weightlog/providers/settings_filters.dart';
+import 'package:weightlog/providers/user_goals.dart';
 
 class UserGoalsCard extends ConsumerStatefulWidget {
   const UserGoalsCard({super.key});
@@ -13,38 +13,20 @@ class UserGoalsCard extends ConsumerStatefulWidget {
 
 class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
   late TextEditingController _weightGoalController;
-  late double _weightGoal;
   bool _isGoalEditMode = false;
 
   @override
   void initState() {
     super.initState();
     _weightGoalController = TextEditingController();
-    _loadWeightGoal();
-  }
-
-  Future<void> _loadWeightGoal() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _weightGoal = prefs.getDouble('weightGoal') ?? 0.0;
-      _weightGoalController.text = _weightGoal.toString();
-    });
-  }
-
-  Future<void> _saveWeightGoal(double weightGoal) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('weightGoal', weightGoal);
-  }
-
-  @override
-  void dispose() {
-    _weightGoalController;
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final isKilograms = ref.watch(settingsFilterProvider)[Filter.useKilograms];
+    final weightGoal = ref.watch(weightGoalProvider);
+
+    _weightGoalController.text = weightGoal.toString();
 
     return Padding(
       padding: const EdgeInsets.all(4),
@@ -61,7 +43,7 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
               children: [
                 !_isGoalEditMode
                     ? Text(
-                        _weightGoalController.text,
+                        weightGoal.toString(),
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
@@ -100,7 +82,9 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
                 if (_isGoalEditMode) {
                   final newWeightGoal =
                       double.parse(_weightGoalController.text);
-                  _saveWeightGoal(newWeightGoal);
+                  ref
+                      .watch(weightGoalProvider.notifier)
+                      .setWeightGoal(newWeightGoal);
                 }
                 setState(() {
                   _isGoalEditMode = !_isGoalEditMode;
@@ -111,5 +95,11 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _weightGoalController;
+    super.dispose();
   }
 }

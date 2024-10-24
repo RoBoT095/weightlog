@@ -16,9 +16,12 @@
 - Import/Export all your weight
 
 <p>
-<img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Dashboard.jpg?raw=true" alt="Dashboard" width=200 />
-<img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew.jpg?raw=true" alt="New Weight" width=200 />
-<img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics.jpg?raw=true" alt="Analytics" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Dashboard.png?raw=true" alt="Dashboard" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew.png?raw=true" alt="New Weight" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics.png?raw=true" alt="Analytics" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Dashboard_Dark.png?raw=true" alt="Dashboard in dark mode" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew_Dark.png?raw=true" alt="New Weight in dark mode" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics_Dark.png?raw=true" alt="Analytics in dark mode" width=200 />
 </p>
 
 <!-- Debug symbols in: projectFolder/build/app/intermediates/merged_native_libs/release/out/lib/ -->

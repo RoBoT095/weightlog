@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weightlog/models/weight.dart';
 import 'package:weightlog/providers/settings_filters.dart';
 import 'package:weightlog/providers/user_weight.dart';
+import 'package:weightlog/providers/user_goals.dart';
 
 class WeightGraph extends ConsumerWidget {
   const WeightGraph({
@@ -18,9 +19,13 @@ class WeightGraph extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDark = MediaQuery.platformBrightnessOf(context).name == 'dark';
     final weightProv = ref.read(userWeightProvider.notifier);
     final isKilograms = ref.watch(settingsFilterProvider)[Filter.useKilograms]!;
+    final weightGoal = ref.watch(weightGoalProvider);
+
     List<FlSpot> dataPoints = [];
+    List<WeightTrackModel> filteredWeightData = [];
 
     // flip data around so graph starts with oldest to newest data points
     weightData.sort((a, b) => a.date.compareTo(b.date));
@@ -29,11 +34,12 @@ class WeightGraph extends ConsumerWidget {
     if (startIndex < 0) startIndex = 0;
 
     for (int i = startIndex; i < weightData.length; i++) {
-      double weight = weightData[i].weight;
+      filteredWeightData.add(weightData[i]);
+      double w = weightData[i].weight;
       if (isKilograms) {
-        weight = weightProv.convertToKilograms(weightData[i].weight);
+        w = weightProv.convertToKilograms(w);
       }
-      dataPoints.add(FlSpot((i - startIndex).toDouble(), (weight)));
+      dataPoints.add(FlSpot(i - startIndex.toDouble(), w));
     }
 
     double calculateMinWeight(List<FlSpot> dataPoints) {
@@ -63,8 +69,34 @@ class WeightGraph extends ConsumerWidget {
           lineBarsData: [
             LineChartBarData(
               spots: dataPoints,
+              gradient: isDark
+                  // Dark Theme Line Gradient
+                  ? const LinearGradient(colors: [
+                      Color.fromRGBO(0, 163, 164, 1),
+                      Color.fromRGBO(0, 188, 161, 1),
+                      Color.fromRGBO(0, 212, 147, 1),
+                      Color.fromRGBO(105, 232, 130, 1),
+                      Color.fromRGBO(175, 250, 112, 1),
+                    ])
+                  // Light Theme Line Gradient
+                  : const LinearGradient(colors: [
+                      Color.fromRGBO(2, 142, 242, 1),
+                      Color.fromRGBO(0, 170, 228, 1),
+                      Color.fromRGBO(0, 192, 217, 1),
+                      Color.fromRGBO(0, 216, 199, 1),
+                      Color.fromRGBO(44, 237, 163, 1),
+                    ]),
+              barWidth: 4,
+              isCurved: true,
+              preventCurveOverShooting: true,
             ),
           ],
+          extraLinesData: ExtraLinesData(horizontalLines: [
+            HorizontalLine(
+                y: weightGoal,
+                color: Colors.green.withOpacity(0.6),
+                dashArray: [20, 20])
+          ]),
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
               getTooltipItems: (touchedSpots) {
@@ -72,8 +104,9 @@ class WeightGraph extends ConsumerWidget {
                   if (lineSpot.x.toInt() > weightData.length) {
                     return null;
                   }
+                  final lineData = filteredWeightData[lineSpot.x.toInt()];
                   return LineTooltipItem(
-                    '${isKilograms ? weightProv.convertToKilograms(weightData[lineSpot.x.toInt()].weight) : weightData[lineSpot.x.toInt()].weight} \n ${weightProv.convertDate(weightData[lineSpot.x.toInt()].date)}',
+                    '${isKilograms ? weightProv.convertToKilograms(lineData.weight) : lineData.weight} \n ${weightProv.convertDate(lineData.date)}',
                     const TextStyle(
                       color: Colors.white,
                     ),

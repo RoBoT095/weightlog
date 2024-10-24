@@ -78,19 +78,13 @@ class _NavScreenState extends ConsumerState<NavScreen> {
         currentIndex: _selectedPageIndex,
         iconSize: 40,
         backgroundColor: Theme.of(context).colorScheme.surface,
-        items: [
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        unselectedItemColor:
+            Theme.of(context).colorScheme.onSecondary.withOpacity(0.5),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.inbox), label: 'Dashboard'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.inbox,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              label: 'Dashboard'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.analytics,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              label: 'Analytics'),
+              icon: Icon(Icons.analytics), label: 'Analytics'),
         ],
       ),
     );
