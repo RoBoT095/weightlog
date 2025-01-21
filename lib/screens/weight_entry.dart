@@ -28,8 +28,6 @@ class _WeightEntryScreenState extends ConsumerState<WeightEntryScreen> {
   @override
   void initState() {
     super.initState();
-    // displayWeight = widget.userWeight.weight;
-    // displayComment = widget.userWeight.comment;
     _weightController =
         TextEditingController(text: widget.userWeight.weight.toString());
     _commentController = TextEditingController(text: widget.userWeight.comment);
@@ -149,15 +147,18 @@ class _WeightEntryScreenState extends ConsumerState<WeightEntryScreen> {
                     controller: _weightController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Weight (${isKilograms ? 'kg' : 'lb'})',
+                      labelText: 'Weight (${isKilograms ? 'kg' : 'lb'}):',
+                      labelStyle: const TextStyle(fontSize: 20),
                     ),
                   )
-                : Text(
-                    '${isKilograms ? weightProv.convertToKilograms(widget.userWeight.weight) : widget.userWeight.weight} ${isKilograms ? 'kg' : 'lb'}',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
+                : Center(
+                    child: Text(
+                      '${isKilograms ? weightProv.convertToKilograms(widget.userWeight.weight) : widget.userWeight.weight} ${isKilograms ? 'kg' : 'lb'}',
+                      style: TextStyle(
+                        fontSize: MediaQuery.sizeOf(context).width / 10,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
             const SizedBox(height: 20),
@@ -182,18 +183,27 @@ class _WeightEntryScreenState extends ConsumerState<WeightEntryScreen> {
                       ),
                     ],
                   )
-                : Text(
-                    '${formatter.format(_selectedDate)} ${_selectedTime.format(context)}',
-                    style: const TextStyle(fontSize: 16),
+                : Center(
+                    child: Text(
+                      '${formatter.format(_selectedDate)} ${_selectedTime.format(context)}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
             const SizedBox(height: 20),
+            const Divider(),
             // Comment
+            if (!_isEditMode)
+              const Text(
+                "Comment:",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
             _isEditMode
                 ? TextFormField(
                     controller: _commentController,
                     maxLines: null,
                     decoration: const InputDecoration(
-                      labelText: 'Comment',
+                      labelText: 'Comment:',
+                      labelStyle: TextStyle(fontSize: 20),
                     ),
                   )
                 : Container(

@@ -23,6 +23,3 @@
     <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew_Dark.png?raw=true" alt="New Weight in dark mode" width=200 />
     <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics_Dark.png?raw=true" alt="Analytics in dark mode" width=200 />
 </p>
-
-<!-- Debug symbols in: projectFolder/build/app/intermediates/merged_native_libs/release/out/lib/ -->
-<!-- select the three folders "arm64-v8a, armeabi-v7a, x86_64" and compress into native-debug-symbols.zip -->

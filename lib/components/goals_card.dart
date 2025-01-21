@@ -62,8 +62,8 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
                               RegExp(r'(^\d*\.?\d*)')),
                         ],
                         decoration: const InputDecoration(
-                          label: Text('Goal'),
-                        ),
+                            label: Text('Goal:'),
+                            labelStyle: TextStyle(fontSize: 20)),
                       )),
                 Text(
                   isKilograms! ? ' kg' : ' lb',

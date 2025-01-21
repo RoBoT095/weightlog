@@ -106,6 +106,13 @@ class _WeightListState extends ConsumerState<WeightList> {
                               fontSize: 18,
                             ),
                           ),
+                          if (widget.userWeights[index].comment.isNotEmpty)
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Tooltip(
+                                  message: "Contains A Comment",
+                                  child: Icon(Icons.more_outlined, size: 20)),
+                            )
                         ],
                       ),
                       trailing: Text(

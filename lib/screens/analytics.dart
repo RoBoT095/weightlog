@@ -10,6 +10,7 @@ class AnalyticsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weightData = ref.watch(userWeightProvider);
+    const double heightSpacing = 15;
 
     if (weightData.isEmpty) {
       return Center(
@@ -36,6 +37,7 @@ class AnalyticsScreen extends ConsumerWidget {
               weightData: weightData,
               graphDayDuration: 7,
             ),
+            const SizedBox(height: heightSpacing),
             const Text(
               'Past Month',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -44,6 +46,7 @@ class AnalyticsScreen extends ConsumerWidget {
               weightData: weightData,
               graphDayDuration: 30,
             ),
+            const SizedBox(height: heightSpacing),
             const Text(
               'Past 3 Months',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -52,6 +55,7 @@ class AnalyticsScreen extends ConsumerWidget {
               weightData: weightData,
               graphDayDuration: 90,
             ),
+            const SizedBox(height: heightSpacing),
             const Text(
               'All Time',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
