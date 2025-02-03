@@ -2,7 +2,7 @@ name: weightlog
 description: "Set a goal and track your weight day by day"
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.2.2+7
+version: 1.2.3+8
 
 environment:
     sdk: ">=3.3.0 <4.0.0"

@@ -145,7 +145,8 @@ class _WeightEntryScreenState extends ConsumerState<WeightEntryScreen> {
             _isEditMode
                 ? TextFormField(
                     controller: _weightController,
-                    keyboardType: TextInputType.number,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     decoration: InputDecoration(
                       labelText: 'Weight (${isKilograms ? 'kg' : 'lb'}):',
                       labelStyle: const TextStyle(fontSize: 20),

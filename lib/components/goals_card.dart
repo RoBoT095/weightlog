@@ -56,7 +56,8 @@ class _UserGoalsCardState extends ConsumerState<UserGoalsCard> {
                     : Expanded(
                         child: TextField(
                         controller: _weightGoalController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'(^\d*\.?\d*)')),

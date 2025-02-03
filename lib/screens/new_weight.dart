@@ -129,7 +129,8 @@ class _NewWeightScreenState extends ConsumerState<NewWeightScreen> {
           children: [
             TextField(
               controller: _weightValueController,
-              keyboardType: TextInputType.number,
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)')),
               ],
