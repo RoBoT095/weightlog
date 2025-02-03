@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    namespace "com.example.weight_tracker"
+    namespace "com.example.weightlog"
     compileSdk 34
     ndkVersion flutter.ndkVersion
 
