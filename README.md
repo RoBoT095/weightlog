@@ -14,12 +14,14 @@
 - A graph to display change for 1 week, 1 month, 3 months, and for all time in total
 - Set a weight goal that is displayed above weight list in dashboard
 - Import/Export all your weight
-
+    
 <p>
-    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Dashboard.png?raw=true" alt="Dashboard" width=200 />
-    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew.png?raw=true" alt="New Weight" width=200 />
-    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics.png?raw=true" alt="Analytics" width=200 />
-    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Dashboard_Dark.png?raw=true" alt="Dashboard in dark mode" width=200 />
-    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/CreateNew_Dark.png?raw=true" alt="New Weight in dark mode" width=200 />
-    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Phone/Analytics_Dark.png?raw=true" alt="Analytics in dark mode" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Android/Dashboard.png?raw=true" alt="Dashboard" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Android/CreateNew.png?raw=true" alt="New Weight" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Android/Analytics.png?raw=true" alt="Analytics" width=200 />
+</p>
+<p>
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Android/Dashboard_Dark.png?raw=true" alt="Dashboard in dark mode" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Android/CreateNew_Dark.png?raw=true" alt="New Weight in dark mode" width=200 />
+    <img src="https://github.com/RoBoT095/weightlog/blob/main/images/Android/Analytics_Dark.png?raw=true" alt="Analytics in dark mode" width=200 />
 </p>
