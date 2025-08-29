@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sql;
@@ -30,13 +30,8 @@ Future<Database> _getDatabase() async {
 class UserWeightNotifier extends StateNotifier<List<WeightTrackModel>> {
   UserWeightNotifier() : super(const []);
 
-  Future<void> loadWeight() async {
-    final db = await _getDatabase();
-    final data = await db.query(
-      'user_weight',
-      orderBy: 'date DESC',
-    );
-    final weights = data
+  List<WeightTrackModel> _parseWeights(List<Map<String, Object?>> data) {
+    return data
         .map(
           (row) => WeightTrackModel(
             id: row['id'] as String,
@@ -46,6 +41,15 @@ class UserWeightNotifier extends StateNotifier<List<WeightTrackModel>> {
           ),
         )
         .toList();
+  }
+
+  Future<void> loadWeight() async {
+    final db = await _getDatabase();
+    final data = await db.query(
+      'user_weight',
+      orderBy: 'date DESC',
+    );
+    final weights = _parseWeights(data);
 
     state = weights;
   }
@@ -68,16 +72,7 @@ class UserWeightNotifier extends StateNotifier<List<WeightTrackModel>> {
         orderBy: 'date DESC',
       );
 
-      state = data
-          .map(
-            (row) => WeightTrackModel(
-              id: row['id'] as String,
-              date: row['date'] as int,
-              weight: row['weight'] as double,
-              comment: row['comment'] as String,
-            ),
-          )
-          .toList();
+      state = _parseWeights(data);
     });
   }
 
@@ -107,16 +102,7 @@ class UserWeightNotifier extends StateNotifier<List<WeightTrackModel>> {
       orderBy: 'date DESC',
     );
 
-    state = data
-        .map(
-          (row) => WeightTrackModel(
-            id: row['id'] as String,
-            date: row['date'] as int,
-            weight: row['weight'] as double,
-            comment: row['comment'] as String,
-          ),
-        )
-        .toList();
+    state = _parseWeights(data);
   }
 
   Future<void> exportDatabase(String saveToDir) async {
